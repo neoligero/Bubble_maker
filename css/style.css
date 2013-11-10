@@ -1,0 +1,30 @@
+.circle01 {
+	min-width: 50px;
+	min-height: 50px;
+	border-radius: 50%; 
+	background: black;
+	text-align: center;
+	color: white;
+	font-size: 18px;
+	font-family: Arial, verdana;
+	-webkit-transition: 200ms ease-out;
+    -moz-transition: 200ms ease-out;
+    -o-transition: 200ms ease-out;
+    transition: 200ms ease-out;
+	transition-property: height, width, margin;
+	overflow: visible;
+	
+	position: absolute;
+	
+	background: -webkit-radial-gradient(40px 60px, circle, #5cabff, #000);
+	background: -moz-radial-gradient(40px 60px, circle, #5cabff, #000);
+	background: radial-gradient(40px 60px, circle, #5cabff, #000);
+	opacity: 0.95;
+
+/*.circle01:hover {
+	-webkit-transform: scale(1.6) translateZ(0);
+    -moz-transform: scale(1.6) translateZ(0);
+    -o-transform: scale(1.6) translateZ(0);
+    transform: scale(1.6) translateZ(0);
+}*/
+

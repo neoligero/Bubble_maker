@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link rel='stylesheet' type='text/css' href='/css/style.css' />
+	<script type='text/javascript' src='/js/bubble_maker.js'></script>
+</head>
+<body style='margin: 0;'>
+    <div style="width: 100%; height: 400px; position: relative;" id="container_bubbles" ></div>
+	<script>
+		var bubbles = [
+			{'id': 'circle01', 'top': 80, 'left': 80, 'size': 100, 'grow': 100, 'text': 'HTML5'},
+			{'id': 'circle02', 'top': 160, 'left': 170, 'size': 100, 'grow': 100, 'text': 'Articulos'},
+			{'id': 'circle03', 'top': 100, 'left': 280, 'size': 120, 'grow': 100, 'text': 'Video Juegos'},
+			{'id': 'circle04', 'top': 120, 'left': 420, 'size': 100, 'grow': 100, 'text': 'Blog'}
+		];
+		generator(bubbles, document.getElementById('container_bubbles'));</script>
+</body>
+</html>
