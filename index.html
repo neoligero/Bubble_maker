@@ -6,13 +6,15 @@
 	<script type='text/javascript' src='js/bubble_maker.js'></script>
 </head>
 <body style='margin: 0;'>
+	<div id='info'></div>
     <div style="width: 100%; height: 400px; position: relative;" id="container_bubbles" ></div>
 	<script>
 		var bubbles = [
-			{'id': 'circle01', 'top': 80, 'left': 80, 'size': 100, 'grow': 100, 'text': 'HTML5'},
-			{'id': 'circle02', 'top': 160, 'left': 170, 'size': 100, 'grow': 100, 'text': 'Articulos'},
-			{'id': 'circle03', 'top': 100, 'left': 280, 'size': 120, 'grow': 100, 'text': 'Video Juegos'},
-			{'id': 'circle04', 'top': 120, 'left': 420, 'size': 100, 'grow': 100, 'text': 'Blog'}
+			{'id': 'circle01', 'top': 100, 'left': 75, 'size': 90, 'grow': 100, 'text': 'sobre mi'},
+			{'id': 'circle02', 'top': 150, 'left': 160, 'size': 110, 'grow': 100, 'text': 'proyectos'},
+			{'id': 'circle03', 'top': 120, 'left': 280, 'size': 130, 'grow': 100, 'text': 'curriculum'},
+			{'id': 'circle04', 'top': 160, 'left': 422, 'size': 80, 'grow': 100, 'text': 'blog'},
+			{'id': 'circle05', 'top': 110, 'left': 510, 'size': 100, 'grow': 100, 'text': 'contacto'}
 		];
 		generator(bubbles, document.getElementById('container_bubbles'));</script>
 </body>

@@ -10,6 +10,9 @@ var Bubble = function(id, top, left, size, grow) {
 	this.grow = grow;
 }
 
+/*
+** Generates the menu from the array "bubbles"
+*/
 function generator(array_bubbles, container) {
 	for (var i = 0 ; i < array_bubbles.length ; i++){
 		var b1 = document.createElement('div');
@@ -18,12 +21,15 @@ function generator(array_bubbles, container) {
 		b1.setAttribute('style', 'width:' + array_bubbles[i].size + 'px; height:' + array_bubbles[i].size + 'px; margin-top:' + array_bubbles[i].top + 'px; margin-left:' + array_bubbles[i].left + 'px;');
 		b1.setAttribute('onmouseover', 'animate(bubbles, this)');
 		b1.setAttribute('onmouseout', 'reorder(bubbles)');
-		b1.innerHTML = '<span style="line-height: ' + array_bubbles[i].size + 'px;">' + array_bubbles[i].text + '</span>';
+		b1.innerHTML = '<div class="text_circle">' + array_bubbles[i].text + '</div>';
 		
 		container.appendChild(b1);
 	}
 }
 
+/*
+** Generates aleatory bubbles and returns an array object
+*/
 function masive_generator(container) {
 	var size = 30;
 	var amount = 20;
@@ -49,27 +55,37 @@ function masive_generator(container) {
 	return array;
 }
 
-function animate(array_bubbles, circle) {
+/*
+** Animates the given bubble and look for collisions
+*/
+function animate(array_bubbles, dom_circle) {
 	for(var i = 0; i < array_bubbles.length; i++) {
-		if(array_bubbles[i].id == circle.id) {
-			circle.setAttribute("style","width:" + (array_bubbles[i].size + array_bubbles[i].grow) + "px; height:" + (array_bubbles[i].size + array_bubbles[i].grow) + 
-			"px; border-radius:50%; margin-top: " + (circle.offsetTop - array_bubbles[i].grow/2) + "px; margin-left: " + (circle.offsetLeft - array_bubbles[i].grow/2) + "px;");
-			circle.innerHTML = '<span style="line-height: ' + (array_bubbles[i].size + array_bubbles[i].grow) + 'px; pointer-events: none;">' + array_bubbles[i].text + '</span>';
+		if(array_bubbles[i].id == dom_circle.id) {
+			dom_circle.setAttribute("style","width:" + (array_bubbles[i].size + array_bubbles[i].grow) + "px; height:" + (array_bubbles[i].size + array_bubbles[i].grow) + "px; border-radius:50%; margin-top: " + (dom_circle.offsetTop - array_bubbles[i].grow/2) + "px; margin-left: " + (dom_circle.offsetLeft - array_bubbles[i].grow/2) + "px;");
 			
-			setTimeout( function(){collisions(array_bubbles, circle);}, 200);
+			setTimeout( function(){collisions(array_bubbles, dom_circle);}, 200);
 		}
 	}
 }
 
+/*
+** Reorganize all bubbles
+*/
 function reorder(array_bubbles) {
 	for (var i = 0 ; i < array_bubbles.length ; i++){
 		var dom_circle = document.getElementById(array_bubbles[i].id);
 		dom_circle.setAttribute("style", "margin-top:" + array_bubbles[i].top + "px; margin-left:" + array_bubbles[i].left + "px; width:" + array_bubbles[i].size+ "px; height:" + array_bubbles[i].size + "px;");
-		dom_circle.innerHTML = '<span style="line-height: ' + array_bubbles[i].size  + 'px;">' + array_bubbles[i].text + '</span>';
 	}
 }
 
+/*
+** Check up collisions recursively omitting given bubbles
+*/
 function collisions(array_bubbles, circle, omitir) {
+	if( typeof arguments[2] == 'undefined' ) {
+		omitir = new Bubble(-1, 1, 1);
+	}
+	
 	var divs = new Array();
 	
 	for (var i = 0 ; i < array_bubbles.length ; i++){
@@ -77,36 +93,38 @@ function collisions(array_bubbles, circle, omitir) {
 		divs[i].size = array_bubbles[i].size;
 	}
 	
-	if( typeof arguments[2] == 'undefined' ) {
-		omitir = {'ìd': -1};
-	}
-	
-	for (var i=0; i < divs.length; i++)
-		{
-			if( divs[i].id != circle.id  && divs[i].id != omitir.id )  {
+	var cols = new Array();
+	for (var i=0; i < divs.length; i++) {
+		if( divs[i].id != circle.id  && divs[i].id != omitir.id )  {
+		
+			var distance = hasCollision(circle, divs[i]);
 			
-				var distance = hasCollision(circle, divs[i]);
+			if ( distance > 0 ) {
 				
-				if ( distance > 0 ) {
-					distance *= _SPEED;
-					
-					if( circle.offsetTop < divs[i].offsetTop && circle.offsetLeft < divs[i].offsetLeft ) {
-						divs[i].setAttribute("style","margin-top: " + (divs[i].offsetTop + distance) + "px; margin-left:  " + (divs[i].offsetLeft + distance) + "px; width:" + divs[i].size+ "px; height:" + divs[i].size + "px;");
-					}
-					else if( circle.offsetTop > divs[i].offsetTop && circle.offsetLeft < divs[i].offsetLeft ) {
-						divs[i].setAttribute("style","margin-top: " + (divs[i].offsetTop - distance) + "px; margin-left:  " + (divs[i].offsetLeft + distance) + "px; width:" + divs[i].size+ "px; height:" + divs[i].size + "px;");
-					}
-					else if( circle.offsetTop < divs[i].offsetTop && circle.offsetLeft > divs[i].offsetLeft ) {
-						divs[i].setAttribute("style","margin-top: " + (divs[i].offsetTop + distance) + "px; margin-left:  " + (divs[i].offsetLeft - distance) + "px; width:" + divs[i].size+ "px; height:" + divs[i].size + "px;");
-					}
-					else {
-						divs[i].setAttribute("style","margin-top: " + (divs[i].offsetTop - distance) + "px; margin-left:  " + (divs[i].offsetLeft - distance) + "px; width:" + divs[i].size+ "px; height:" + divs[i].size + "px;");
-					}
-					var n = i;
-					setTimeout( function(){collisions(array_bubbles, divs[n], circle);}, 200);
+				distance *= _SPEED;
+				
+				if( (circle.offsetTop + circle.offsetWidth/2) < (divs[i].offsetTop + divs[i].offsetWidth/2) && (circle.offsetLeft + circle.offsetWidth/2) < (divs[i].offsetLeft + divs[i].offsetWidth/2) ) {
+					divs[i].setAttribute("style","margin-top: " + (divs[i].offsetTop + distance) + "px; margin-left:  " + (divs[i].offsetLeft + distance) + "px; width:" + divs[i].size+ "px; height:" + divs[i].size + "px;");
 				}
+				else if( (circle.offsetTop + circle.offsetWidth/2) > (divs[i].offsetTop + divs[i].offsetWidth/2) && (circle.offsetLeft + circle.offsetWidth/2) < (divs[i].offsetLeft + divs[i].offsetWidth/2) ) {
+					divs[i].setAttribute("style","margin-top: " + (divs[i].offsetTop - distance) + "px; margin-left:  " + (divs[i].offsetLeft + distance) + "px; width:" + divs[i].size+ "px; height:" + divs[i].size + "px;");
+				}
+				else if( (circle.offsetTop + circle.offsetWidth/2) < (divs[i].offsetTop + divs[i].offsetWidth/2) && (circle.offsetLeft + circle.offsetWidth/2) > (divs[i].offsetLeft + divs[i].offsetWidth/2) ) {
+					divs[i].setAttribute("style","margin-top: " + (divs[i].offsetTop + distance) + "px; margin-left:  " + (divs[i].offsetLeft - distance) + "px; width:" + divs[i].size+ "px; height:" + divs[i].size + "px;");
+				}
+				else {
+					divs[i].setAttribute("style","margin-top: " + (divs[i].offsetTop - distance) + "px; margin-left:  " + (divs[i].offsetLeft - distance) + "px; width:" + divs[i].size+ "px; height:" + divs[i].size + "px;");
+				}
+				retard(array_bubbles, divs[i], circle, 200);
 			}
 		}
+	}
+}
+
+function retard(array_bubbles, actual, omited, time) {
+	setTimeout( function(){
+		collisions(array_bubbles, actual, omited);
+	}, time);
 }
 
 function getDistance(obj1,obj2){
