@@ -1,13 +1,15 @@
 var _SPEED = 1.3;
 
-var Bubble = function(id, top, left, size, grow) {
-	if(typeof size == 'undefined') size = 100;
-	if(typeof grow == 'undefined') grow = 100;
+var Bubble = function(id, top, left, size, grow, text, url, target) {
+	if(typeof target == 'undefined') target = false;
 	this.id = id;
 	this.top = top;
 	this.left = left;
 	this.size = size;
 	this.grow = grow;
+	this.text = text;
+	this.url = url;
+	this.target = target;
 }
 
 /*
@@ -21,6 +23,11 @@ function generator(array_bubbles, container) {
 		b1.setAttribute('style', 'width:' + array_bubbles[i].size + 'px; height:' + array_bubbles[i].size + 'px; margin-top:' + array_bubbles[i].top + 'px; margin-left:' + array_bubbles[i].left + 'px;');
 		b1.setAttribute('onmouseover', 'animate(bubbles, this)');
 		b1.setAttribute('onmouseout', 'reorder(bubbles)');
+		if( array_bubbles[i].target )
+			b1.setAttribute('onclick', 'window.open("' + array_bubbles[i].url + '");');
+		else
+			b1.setAttribute('onclick', 'location.href="' + array_bubbles[i].url + '";');
+		
 		b1.innerHTML = '<div class="text_circle">' + array_bubbles[i].text + '</div>';
 		
 		container.appendChild(b1);
@@ -45,7 +52,7 @@ function masive_generator(container) {
 		b1.setAttribute('onmouseover', 'animate(bubbles, this)');
 		b1.setAttribute('onmouseout', 'reorder(bubbles)');
 		
-		array[i] = new Bubble(i+'e', y, x, size, size*2);
+		array[i] = new Bubble(i+'e', y, x, size, size*2, '', '#', false);
 		
 		container.appendChild(b1);
 		x += size;
@@ -83,7 +90,7 @@ function reorder(array_bubbles) {
 */
 function collisions(array_bubbles, circle, omitir) {
 	if( typeof arguments[2] == 'undefined' ) {
-		omitir = new Bubble(-1, 1, 1);
+		omitir = new Bubble(-1, 1, 1, 1, 1, '', '', false);
 	}
 	
 	var divs = new Array();
