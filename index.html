@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<link rel='stylesheet' type='text/css' href='css/style.css' />
-	<script type='text/javascript' src='js/bubble_maker_ie.js'></script>
+	<script type='text/javascript' src='js/bubble_maker.js'></script>
 </head>
 <body style='margin: 0;'>
 	<div id='info' style="width: 100%; height: 30px; position: relative;"></div>
@@ -13,29 +13,29 @@
 	<div style="width: 150px; height: 450px; position: absolute; top: 30px; left:600px;" id="container_bubbles3" ></div>
 	<script>
 		var bubbles = [
-			{'id': 'circle01', 'top': 110, 'left': 95, 'size': 70, 'grow': 80, 'text': 'sobre mi', 'url': 'www.google.com', 'target': true},
-			{'id': 'circle02', 'top': 160, 'left': 160, 'size': 90, 'grow': 80, 'text': 'proyectos', 'url': '#', 'target': false},
-			{'id': 'circle03', 'top': 110, 'left': 260, 'size': 110, 'grow': 80, 'text': 'curriculum', 'url': '#', 'target': false},
-			{'id': 'circle04', 'top': 165, 'left': 380, 'size': 60, 'grow': 70, 'text': 'blog', 'url': '#', 'target': false},
-			{'id': 'circle05', 'top': 110, 'left': 445, 'size': 80, 'grow': 80, 'text': 'contacto', 'url': '#', 'target': false}
+			{'id': 'circle01', 'top': 60, 'left': 95, 'size': 70, 'grow': 80, 'text': 'home', 'url': '#', 'target': false, 'clas': 'circle01'},
+			{'id': 'circle02', 'top': 110, 'left': 160, 'size': 90, 'grow': 80, 'text': 'portfolio', 'url': '#', 'target': false, 'clas': 'circle01'},
+			{'id': 'circle03', 'top': 60, 'left': 260, 'size': 110, 'grow': 80, 'text': 'curriculum', 'url': '#', 'target': false, 'clas': 'circle01'},
+			{'id': 'circle04', 'top': 115, 'left': 380, 'size': 60, 'grow': 70, 'text': 'blog', 'url': '#', 'target': false, 'clas': 'circle01'},
+			{'id': 'circle05', 'top': 60, 'left': 445, 'size': 80, 'grow': 80, 'text': 'contact', 'url': '#', 'target': false, 'clas': 'circle01'}
 		];
 		generator(bubbles, document.getElementById('container_bubbles'));
-		
+
 		var bubbles2 = [
-			{'id': 'c01', 'top': 100, 'left': 70, 'size': 50, 'grow': 70, 'text': 'a', 'url': '#', 'target': false},
-			{'id': 'c02', 'top': 100, 'left': 140, 'size': 50, 'grow': 70, 'text': 'b', 'url': '#', 'target': false},
-			{'id': 'c03', 'top': 100, 'left': 210, 'size': 50, 'grow': 70, 'text': 'c', 'url': '#', 'target': false},
-			{'id': 'c04', 'top': 100, 'left': 280, 'size': 50, 'grow': 70, 'text': 'd', 'url': '#', 'target': false},
-			{'id': 'c05', 'top': 100, 'left': 350, 'size': 50, 'grow': 70, 'text': 'e', 'url': '#', 'target': false}
+			{'id': 'c01', 'top': 100, 'left': 70, 'size': 50, 'grow': 70, 'text': 'a', 'url': '#', 'target': false, 'clas': 'circle01'},
+			{'id': 'c02', 'top': 100, 'left': 140, 'size': 50, 'grow': 70, 'text': 'b', 'url': '#', 'target': false, 'clas': 'circle01'},
+			{'id': 'c03', 'top': 100, 'left': 210, 'size': 50, 'grow': 70, 'text': 'c', 'url': '#', 'target': false, 'clas': 'circle01'},
+			{'id': 'c04', 'top': 100, 'left': 280, 'size': 50, 'grow': 70, 'text': 'd', 'url': '#', 'target': false, 'clas': 'circle01'},
+			{'id': 'c05', 'top': 100, 'left': 350, 'size': 50, 'grow': 70, 'text': 'e', 'url': '#', 'target': false, 'clas': 'circle01'}
 		];
 		generator(bubbles2, document.getElementById('container_bubbles2'));
 		
 		var bubbles3 = [
-			{'id': 'e01', 'top': 70, 'left': 50, 'size': 50, 'grow': 70, 'text': 'a', 'url': '#', 'target': false},
-			{'id': 'e02', 'top': 140, 'left': 50, 'size': 50, 'grow': 70, 'text': 'b', 'url': '#', 'target': false},
-			{'id': 'e03', 'top': 210, 'left': 50, 'size': 50, 'grow': 70, 'text': 'c', 'url': '#', 'target': false},
-			{'id': 'e04', 'top': 280, 'left': 50, 'size': 50, 'grow': 70, 'text': 'd', 'url': '#', 'target': false},
-			{'id': 'e05', 'top': 350, 'left': 50, 'size': 50, 'grow': 70, 'text': 'e', 'url': '#', 'target': false}
+			{'id': 'e01', 'top': 70, 'left': 50, 'size': 50, 'grow': 70, 'text': 'a', 'url': '#', 'target': false, 'clas': 'circle01'},
+			{'id': 'e02', 'top': 140, 'left': 50, 'size': 50, 'grow': 70, 'text': 'b', 'url': '#', 'target': false, 'clas': 'circle01'},
+			{'id': 'e03', 'top': 210, 'left': 50, 'size': 50, 'grow': 70, 'text': 'c', 'url': '#', 'target': false, 'clas': 'circle01'},
+			{'id': 'e04', 'top': 280, 'left': 50, 'size': 50, 'grow': 70, 'text': 'd', 'url': '#', 'target': false, 'clas': 'circle01'},
+			{'id': 'e05', 'top': 350, 'left': 50, 'size': 50, 'grow': 70, 'text': 'e', 'url': '#', 'target': false, 'clas': 'circle01'}
 		];
 		generator(bubbles3, document.getElementById('container_bubbles3'));
 		</script>

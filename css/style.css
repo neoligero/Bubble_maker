@@ -10,17 +10,15 @@
     -o-transition: all 250ms ease-out;
     transition: all 250ms ease-out;
 	position: absolute;
-	
 	background: -webkit-radial-gradient(30px 30px, circle, #222, #000);
 	background: -moz-radial-gradient(30px 30px, circle, #222, #000);
 	background: radial-gradient(30px 30px, circle, #222, #000);
 	z-index: 10;
 }
 
-.circle02 {
+.circle_cover {
 	border-radius: 50%;
-	/*background: red;*/
-	background: url(/img/trans.png);
+	background: url(https://github.com/neoligero/Bubble_maker/blob/master/img/trans.png);
 	background-repeat: repeat-x, repeat-y;
 	-webkit-transition:all 250ms ease-out;
     -moz-transition: all 250ms ease-out;
@@ -36,5 +34,3 @@
 	position: relative;
 	z-index: 9;
 }
-
-
